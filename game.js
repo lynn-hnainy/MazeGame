@@ -43,6 +43,15 @@ function time(){
     var live_s=parseInt(live_s_ms[0]);
     var live_m=parseInt(live_splite[0]);
     ++live_ms;
+    if(live_ms==10){
+        live_ms=0;
+        ++live_s;
+    }
+    if(live_s==60){
+        live_s=0;
+        ++live_m;
+    }
+    document.getElementById("live").innerHTML=live_m+":"+live_s+"."+live_ms;
 }
 function startPress(){
     var bound=document.getElementsByClassName("boundary");
