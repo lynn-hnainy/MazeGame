@@ -39,4 +39,19 @@ function startPress(){
         bound[i].classList.remove("youlose");
     }
 }
+function reachEnd(){
+    //if reached end without game being started this is wrong
+    if(started==true){
+        //stop the game to calculate and display score
+        started=false;
+        if(looser==false){
+            //if reached end without touching boundaries add score
+            score+=5;
+            document.getElementById("status").innerHTML="You Won.Your score is "+score;
+        }
+        else{
+            document.getElementById("status").innerHTML="You loose.Your score is "+score;
+        }
+    }
+}
 
