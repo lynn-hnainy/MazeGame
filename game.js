@@ -11,17 +11,22 @@ window.onload=function(){
     surr.onmouseleave=cheating;
 
     var start=document.getElementById("start");
-    start.onclick=startPress;
+    start.onmouseover=startPress;
+    start.onclick=reset;
+    var end=document.getElementById("end");
+    end.onmouseover=reachEnd;
 }
 function touchBoundary(){
     var bound=document.getElementsByClassName("boundary");
     if(started==true){
+        started=false;
         score-=10;
         looser=true;
         //Add the class name making boundary background color red 
         for(var i=0;i<bound.length;i++){
             bound[i].classList.add("youlose");
         }
+        document.getElementById("status").innerHTML="You loose.Your score is "+score;
     }
 }
 function cheating(){
@@ -53,5 +58,10 @@ function reachEnd(){
             document.getElementById("status").innerHTML="You loose.Your score is "+score;
         }
     }
+}
+function reset(){
+    started=false;
+    score=0;
+    document.getElementById("status").innerHTML="Your score is "+score;
 }
 
