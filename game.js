@@ -35,6 +35,15 @@ function cheating(){
         started=false;
     }
 }
+function time(){
+    var live=document.getElementById("live").innerHTML;
+    var live_splite=live.split(":");
+    var live_s_ms=live_splite[1].split(".");
+    var live_ms=parseInt(live_s_ms[1]);
+    var live_s=parseInt(live_s_ms[0]);
+    var live_m=parseInt(live_splite[0]);
+    ++live_ms;
+}
 function startPress(){
     var bound=document.getElementsByClassName("boundary");
     looser=false;
@@ -45,6 +54,7 @@ function startPress(){
     }
 }
 function reachEnd(){
+
     //if reached end without game being started this is wrong
     if(started==true){
         //stop the game to calculate and display score
