@@ -5,7 +5,13 @@ var score=0;
 window.onload=function(){
     var bound=document.getElementsByClassName("boundary");
     for (var i = 0; i < bound.length; i++) 
-        bound[i].onmouseover = touchBoundary;  
+        bound[i].onmouseover = touchBoundary;
+    
+    var surr=document.getElementById("game");
+    surr.onmouseleave=cheating;
+
+    var start=document.getElementById("start");
+    start.onclick=startPress;
 }
 function touchBoundary(){
     var bound=document.getElementsByClassName("boundary");
@@ -22,6 +28,15 @@ function cheating(){
     if(started==true){
         alert("NO CHEATING!!");
         started=false;
+    }
+}
+function startPress(){
+    var bound=document.getElementsByClassName("boundary");
+    looser=false;
+    started=true;
+    for(var i=0;i<bound.length;i++){
+        //Remove red backgroung by removing added class
+        bound[i].classList.remove("youlose");
     }
 }
 
