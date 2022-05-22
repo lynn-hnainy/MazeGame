@@ -1,8 +1,6 @@
 var started=false;
 var looser=false;
 var score=0;
-
-
 //call all functions when the whole page is loaded
 window.onload=function(){
     var bound=document.getElementsByClassName("boundary");
@@ -18,6 +16,12 @@ function touchBoundary(){
         for(var i=0;i<bound.length;i++){
             bound[i].classList.add("youlose");
         }
+    }
+}
+function cheating(){
+    if(started==true){
+        alert("NO CHEATING!!");
+        started=false;
     }
 }
 
