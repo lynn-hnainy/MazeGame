@@ -1,6 +1,7 @@
 var started=false;
 var looser=false;
 var score=0;
+var time_counter=0;
 //call all functions when the whole page is loaded
 window.onload=function(){
     var bound=document.getElementsByClassName("boundary");
@@ -54,6 +55,7 @@ function time(){
     document.getElementById("live").innerHTML=live_m+":"+live_s+"."+live_ms;
 }
 function startPress(){
+    time_counter=setInterval(time,100);
     var bound=document.getElementsByClassName("boundary");
     looser=false;
     started=true;
@@ -63,7 +65,8 @@ function startPress(){
     }
 }
 function reachEnd(){
-
+    clearInterval(time_counter);
+    document.getElementById("live").innerHTML=0+":"+0+"."+0;
     //if reached end without game being started this is wrong
     if(started==true){
         //stop the game to calculate and display score
