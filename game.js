@@ -11,8 +11,8 @@ window.onload=function(){
     surr.onmouseleave=cheating;
 
     var start=document.getElementById("start");
-    start.onmouseover=startPress;
-    start.onclick=reset;
+    start.onclick=startPress;
+    start.oncontextmenu=reset;
     var end=document.getElementById("end");
     end.onmouseover=reachEnd;
 }
