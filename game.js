@@ -2,6 +2,8 @@ var started=false;
 var looser=false;
 var score=0;
 var time_counter=0;
+var live_time=[];
+var max_time=0;
 //call all functions when the whole page is loaded
 window.onload=function(){
     var bound=document.getElementsByClassName("boundary");
@@ -65,12 +67,13 @@ function startPress(){
     }
 }
 function reachEnd(){
-    clearInterval(time_counter);
-    document.getElementById("live").innerHTML=0+":"+0+"."+0;
     //if reached end without game being started this is wrong
     if(started==true){
         //stop the game to calculate and display score
         started=false;
+        clearInterval(time_counter);
+        calculateBestLast();
+        document.getElementById("live").innerHTML=0+":"+0+"."+0;
         if(looser==false){
             //if reached end without touching boundaries add score
             score+=5;
@@ -80,6 +83,11 @@ function reachEnd(){
             document.getElementById("status").innerHTML="You loose.Your score is "+score;
         }
     }
+}
+function calculateBestLast(){
+    var c_time=document.getElementById("live").innerHTML.split(":");
+    var current=parseInt(c_time[0])*60+parseFloat(c_time[1]);
+    console.log(current);
 }
 function reset(){
     started=false;
