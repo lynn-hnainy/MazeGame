@@ -23,6 +23,8 @@ window.onload=function(){
 function touchBoundary(){
     var bound=document.getElementsByClassName("boundary");
     if(started==true){
+        clearInterval(time_counter);
+        document.getElementById("live").innerHTML=0+":"+0+"."+0;
         started=false;
         score-=10;
         looser=true;
@@ -30,7 +32,8 @@ function touchBoundary(){
         for(var i=0;i<bound.length;i++){
             bound[i].classList.add("youlose");
         }
-        document.getElementById("status").innerHTML="You loose.Your score is "+score;
+        document.getElementById("status").innerHTML="You lost";
+        document.getElementById("score").innerHTML=score;
     }
 }
 function cheating(){
@@ -58,6 +61,7 @@ function time(){
     document.getElementById("live").innerHTML=live_m+":"+live_s+"."+live_ms;
 }
 function startPress(){
+    document.getElementById("status").innerHTML="Game On!";
     time_counter=setInterval(time,100);
     var bound=document.getElementsByClassName("boundary");
     looser=false;
@@ -66,23 +70,19 @@ function startPress(){
         //Remove red backgroung by removing added class
         bound[i].classList.remove("youlose");
     }
+    document.getElementById("score").innerHTML=score;
 }
 function reachEnd(){
     //if reached end without game being started this is wrong
     if(started==true){
+        score+=5;
+        document.getElementById("score").innerHTML=score;
+        document.getElementById("status").innerHTML="You Won!";
         calculateBestLast();
         //stop the game to calculate and display score
         started=false;
         clearInterval(time_counter);
         document.getElementById("live").innerHTML=0+":"+0+"."+0;
-        if(looser==false){
-            //if reached end without touching boundaries add score
-            score+=5;
-            document.getElementById("status").innerHTML="You Won.Your score is "+score;
-        }
-        else{
-            document.getElementById("status").innerHTML="You loose.Your score is "+score;
-        }
     }
 }
 function calculateBestLast(){
@@ -101,10 +101,16 @@ function calculateBestLast(){
     //console.log(min_time);
     //console.log(max_time);
     //console.log(current);
+    document.getElementById("last").innerHTML=parseInt(max_time/60)+":"+max_time%60;
+    document.getElementById("best").innerHTML=parseInt(min_time/60)+":"+min_time%60;
 }
 function reset(){
     started=false;
     score=0;
-    document.getElementById("status").innerHTML="Your score is "+score;
+    var bound=document.getElementsByClassName("boundary");
+    document.getElementById("status").innerHTML="Begin by moving your mouse over the \"S\".";
+    for(var i=0;i<bound.length;i++)
+        //Remove red backgroung by removing added class
+        bound[i].classList.remove("youlose");
 }
 
