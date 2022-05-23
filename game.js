@@ -4,6 +4,7 @@ var score=0;
 var time_counter=0;
 var live_time=[];
 var max_time=0;
+var min_time=0;
 //call all functions when the whole page is loaded
 window.onload=function(){
     var bound=document.getElementsByClassName("boundary");
@@ -69,10 +70,10 @@ function startPress(){
 function reachEnd(){
     //if reached end without game being started this is wrong
     if(started==true){
+        calculateBestLast();
         //stop the game to calculate and display score
         started=false;
         clearInterval(time_counter);
-        calculateBestLast();
         document.getElementById("live").innerHTML=0+":"+0+"."+0;
         if(looser==false){
             //if reached end without touching boundaries add score
@@ -87,7 +88,19 @@ function reachEnd(){
 function calculateBestLast(){
     var c_time=document.getElementById("live").innerHTML.split(":");
     var current=parseInt(c_time[0])*60+parseFloat(c_time[1]);
-    console.log(current);
+    if(max_time==0&&min_time==0){
+        min_time=current;
+        max_time=current;
+    }
+    else{
+        if(max_time<=current)
+            max_time=current;
+        if(min_time>=current)
+            min_time=current;
+    }
+    //console.log(min_time);
+    //console.log(max_time);
+    //console.log(current);
 }
 function reset(){
     started=false;
